@@ -28,84 +28,93 @@ import random
 
 #elgamal encryption:
 
-def encrypt(message,p,g,h):
+import random
+
+
+def encrypt(message, p, g, h):
     ciphertext = []
 
     for ch in message:
-        if ch == " ":
-            ciphertext.append(" ")
-            continue
-        m = ord(ch) - ord('A')
 
-        #random k:
-        k = random.randint(1,p-2)
+        # Convert character to number
+        m = ord(ch)
 
-        #c1 = g^k mod p
-        c1 = pow(g,k,p)
+        # m must be less than p
+        if m >= p:
+            print("Character value is too large for chosen p")
+            return []
 
-        #c2 = m * h^k mod p
-        c2 = (m * pow(h,k,p)) % p
+        # Random k
+        k = random.randint(1, p - 2)
 
-        ciphertext.append((c1,c2))
+        # c1 = g^k mod p
+        c1 = pow(g, k, p)
+
+        # c2 = m * h^k mod p
+        c2 = (m * pow(h, k, p)) % p
+
+        ciphertext.append((c1, c2))
 
     return ciphertext
 
 
-def decrypt(ciphertext,p,x):
+def decrypt(ciphertext, p, x):
     plaintext = ""
 
-    for item in ciphertext:
+    for c1, c2 in ciphertext:
 
-        if item == " ":
-            plaintext += " "
-            continue
+        # s = c1^x mod p
+        s = pow(c1, x, p)
 
-        c1, c2 = item
+        # s^(-1) mod p
+        s_inv = pow(s, -1, p)
 
-        #s = c1^x mod p
-        s = pow(c1,x,p)
+        # m = c2 * s^(-1) mod p
+        m = (c2 * s_inv) % p
 
-        #s^(-1) mod p
-        s_inv = pow(s,-1,p)
-
-        #m = c2 * s^(-1) mod p
-
-        m = (c2*s_inv)%p
-
-        plaintext += chr(m+ord('A'))
+        # Convert number back to character
+        plaintext += chr(m)
 
     return plaintext
 
+
 def main():
 
-    plaintext = "Confidential Data"
+    plaintext = input("Enter plaintext: ")
 
-    p = 467
+    # Public parameters
+    p = 2147483647
     g = 2
 
-    #private key
+    # Private key
     x = 127
 
-    h = pow(g,x,p)
+    # Public key component
+    h = pow(g, x, p)
 
-    print("p =",p)
-    print("g = ",g)
-    print("h =",h)
+    print("\np =", p)
+    print("g =", g)
+    print("h =", h)
 
-    print("Public key = ",(p,g,h))
-    print("Private key = ",x)
+    print("Public key =", (p, g, h))
+    print("Private key =", x)
 
-    #encryption:
-    ciphertext = encrypt(plaintext,p,g,h)
+    # Encryption
+    ciphertext = encrypt(plaintext, p, g, h)
 
-    print("\nPlaintext: ",plaintext)
-    print("\nCiphertext: ",ciphertext)
+    print("\nPlaintext:")
+    print(plaintext)
 
-    #decryption:
-    decrypted = decrypt(ciphertext,p,x)
+    print("\nCiphertext:")
+    print(ciphertext)
 
-    print("\nDecrypted: ",decrypted)
+    # Decryption
+    decrypted = decrypt(ciphertext, p, x)
 
-    print("\nVerification: ", decrypted == plaintext)
+    print("\nDecrypted:")
+    print(decrypted)
+
+    print("\nVerification:", decrypted == plaintext)
+
 
 main()
