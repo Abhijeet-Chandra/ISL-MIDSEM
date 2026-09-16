@@ -1,9 +1,22 @@
-# MODIFICATION:
-# interactive toy parameters. This is a student-friendly addition derived from the official exercise; no source listing was supplied.
+p = 23
+g = 5
 
+# Alice
+a = 6
+A = pow(g, a, p)
 
-import secrets,time
-def exchange(p=7919,g=2):
- a=secrets.randbelow(p-3)+2; b=secrets.randbelow(p-3)+2; A=pow(g,a,p); B=pow(g,b,p); return A,B,pow(B,a,p),pow(A,b,p)
-if __name__=='__main__':
- t=time.perf_counter_ns(); A,B,ka,kb=exchange(); print('Alice public:',A,'Bob public:',B); print('Secrets match:',ka==kb,'ns:',time.perf_counter_ns()-t)
+# Bob
+b = 15
+B = pow(g, b, p)
+
+# Shared secret
+alice_secret = pow(B, a, p)
+bob_secret = pow(A, b, p)
+
+print("Alice Public:", A)
+print("Bob Public:", B)
+
+print("Alice Shared Secret:", alice_secret)
+print("Bob Shared Secret:", bob_secret)
+
+print("Keys Match:", alice_secret == bob_secret)
