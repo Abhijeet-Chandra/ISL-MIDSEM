@@ -12,8 +12,8 @@ Encrypt/decrypt with AES-128/192/256.
 
 ## Modified versions (additions)
 
-- `modifications/aes.py`
-- `modifications/02_aes.py`
+- `modifications/00_aes.py`
+- `modifications/02_hex_input_output.py`
 
 ## Reusable blocks
 
