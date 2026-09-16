@@ -13,7 +13,7 @@ Sign and verify an integer message using ElGamal.
 ## Modified versions (additions)
 
 - `modifications/02_elgamal_signature.py`
-- `modifications/elgamal_signature.py`
+- `modifications/elgamal_schnorr_signature.py`
 
 ## Reusable blocks
 
