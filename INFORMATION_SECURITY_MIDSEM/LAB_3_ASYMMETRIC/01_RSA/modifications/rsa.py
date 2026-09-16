@@ -1,3 +1,6 @@
+from math import gcd
+
+
 def RSA(plaintext):
     p = 10007
     q = 10009
