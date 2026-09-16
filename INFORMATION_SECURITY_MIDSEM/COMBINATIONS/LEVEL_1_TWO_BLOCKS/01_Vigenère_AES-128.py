@@ -1,4 +1,19 @@
 # A secure messaging system first applies Vigenère encryption to a user's message and then encrypts the resulting text using AES-128 in ECB mode.
+# Write a Python program that:
+#
+# Takes plaintext from the user.
+# Encrypts it using Vigenère with key "dollars".
+# Encrypts the Vigenère ciphertext using AES-128.
+# Displays both ciphertexts.
+# Performs AES decryption.
+# Performs Vigenère decryption.
+# Displays the recovered original plaintext.
+
+# Constraints:
+#
+# Vigenère operates on alphabetic characters.
+# Spaces should be preserved.
+# AES key: 0123456789ABCDEF0123456789ABCDEF as HEX.
 
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
@@ -44,7 +59,9 @@ def decrypt(text, key):
 
 def aes_encrypt(plaintext):
     # AES-128 key
-    key = b"0123456789ABCDEF"
+    key = bytes.fromhex(
+        "0123456789ABCDEF0123456789ABCDEF"
+    )
 
     # Convert string to bytes
     plaintext = plaintext.encode()
@@ -62,7 +79,9 @@ def aes_encrypt(plaintext):
 
 def aes_decrypt(ciphertext_hex):
     ciphertext = bytes.fromhex(ciphertext_hex)
-    key = b"0123456789ABCDEF"
+    key = bytes.fromhex(
+        "0123456789ABCDEF0123456789ABCDEF"
+    )
 
     cipher = AES.new(key, AES.MODE_ECB)
 
@@ -73,7 +92,7 @@ def aes_decrypt(ciphertext_hex):
 def main():
     plaintext = input("Enter plaintext: ")
 
-    vig_cipher = encrypt(plaintext, "hello")
+    vig_cipher = encrypt(plaintext, "dollars")
     print("Vigenere encryption:", vig_cipher)
 
     aes_cipher = aes_encrypt(vig_cipher)
@@ -84,7 +103,7 @@ def main():
 
     print("AES plaintext: ", aes_pt)
 
-    vig_final_pt = decrypt(aes_pt,"hello")
+    vig_final_pt = decrypt(aes_pt,"dollars")
 
     print("Vigenere plaintext: ", vig_final_pt)
 
