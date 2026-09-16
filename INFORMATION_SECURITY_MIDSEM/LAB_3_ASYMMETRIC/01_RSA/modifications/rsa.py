@@ -8,6 +8,7 @@ def RSA(plaintext):
     n = p * q
     phi = (p - 1) * (q - 1)
 
+    # Find e
     e = -1
 
     for i in range(2, phi):
@@ -15,6 +16,7 @@ def RSA(plaintext):
             e = i
             break
 
+    # Find d
     d = -1
 
     for i in range(1, phi):
@@ -27,10 +29,11 @@ def RSA(plaintext):
     print("e =", e)
     print("d =", d)
 
+    # Encryption
     ciphertext = []
 
     for ch in plaintext:
-        M = ord(ch) - ord('a')
+        M = ord(ch)
         C = pow(M, e, n)
         ciphertext.append(C)
 
@@ -41,16 +44,13 @@ def RSA(plaintext):
 
     for C in ciphertext:
         M = pow(C, d, n)
-        decrypted += chr(M + ord('a'))
+        decrypted += chr(M)
 
     print("Decrypted =", decrypted)
 
-    return ciphertext
-
 
 def main():
-    plaintext = "Asymmetric Encryption"
-    plaintext = plaintext.lower().replace(" ", "")
+    plaintext = input("Enter plaintext: ")
 
     RSA(plaintext)
 
