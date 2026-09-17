@@ -41,7 +41,7 @@ from Crypto.Hash import SHA256
 # Enable Faculties to decrypt with DES, verify RSA signatures, and hash the records.
 #
 # Allow HoDs to view only hashes and verify signatures.
-# 
+#
 # Task:
 #
 # Develop a menu-driven Python program that implements these functionalities using:
