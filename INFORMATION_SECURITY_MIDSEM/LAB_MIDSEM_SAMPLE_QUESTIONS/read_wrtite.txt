@@ -1,0 +1,31 @@
+| Algorithm / Object       | What your code usually returns | Store          | Retrieve                 |
+| ------------------------ | ------------------------------ | -------------- | ------------------------ |
+| Additive                 | `str`                          | `f.write(x)`   | `f.read()`               |
+| Multiplicative           | `str`                          | `f.write(x)`   | `f.read()`               |
+| Affine                   | `str`                          | `f.write(x)`   | `f.read()`               |
+| Vigenere                 | `str`                          | `f.write(x)`   | `f.read()`               |
+| Autokey                  | `str`                          | `f.write(x)`   | `f.read()`               |
+| Playfair                 | `str`                          | `f.write(x)`   | `f.read()`               |
+| Hill                     | `str`                          | `f.write(x)`   | `f.read()`               |
+| DES                      | hex `str`                      | `f.write(x)`   | `f.read()`               |
+| 3DES                     | hex `str`                      | `f.write(x)`   | `f.read()`               |
+| AES                      | hex `str`                      | `f.write(x)`   | `f.read()`               |
+| RSA encryption           | `list[int]`                    | `str(x)`       | `ast.literal_eval()`     |
+| RSA public key           | RSA object                     | `export_key()` | `RSA.import_key()`       |
+| RSA private key          | RSA object                     | `export_key()` | `RSA.import_key()`       |
+| RSA signature            | `bytes`                        | `.hex()`       | `bytes.fromhex()`        |
+| ECC public key           | key object                     | PEM            | `load_pem_public_key()`  |
+| ECC private key          | key object                     | PEM            | `load_pem_private_key()` |
+| ECDH secret              | `bytes`                        | `.hex()`       | `bytes.fromhex()`        |
+| HKDF key                 | `bytes`                        | `.hex()`       | `bytes.fromhex()`        |
+| AES-GCM ciphertext       | `bytes`                        | `.hex()`       | `bytes.fromhex()`        |
+| AES-GCM nonce            | `bytes`                        | `.hex()`       | `bytes.fromhex()`        |
+| ElGamal ciphertext       | `list[tuple]`                  | `str(x)`       | `ast.literal_eval()`     |
+| ElGamal public key       | `tuple[int]`                   | `str(x)`       | `ast.literal_eval()`     |
+| ElGamal private key      | `int`                          | `str(x)`       | `int()`                  |
+| DH public/private values | `int`                          | `str(x)`       | `int()`                  |
+| DH shared secret         | `int`                          | `str(x)`       | `int()`                  |
+| Schnorr signature        | `tuple[int,int]`               | `str(x)`       | `ast.literal_eval()`     |
+| ECC signature            | `bytes`                        | `.hex()`       | `bytes.fromhex()`        |
+| SHA-256                  | hexdigest `str`                | `f.write(x)`   | `f.read()`               |
+| Custom hash              | `int`                          | `str(x)`       | `int()`                  |
