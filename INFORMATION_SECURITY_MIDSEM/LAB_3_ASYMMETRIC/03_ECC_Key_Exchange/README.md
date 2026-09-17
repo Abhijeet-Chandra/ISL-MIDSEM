@@ -13,7 +13,7 @@ Use ECDH to derive the same shared secret at two peers.
 ## Modified versions (additions)
 
 - `modifications/02_ecc_ecdh.py`
-- `modifications/ecc_ecdh.py`
+- `modifications/ECC.py`
 
 ## Reusable blocks
 

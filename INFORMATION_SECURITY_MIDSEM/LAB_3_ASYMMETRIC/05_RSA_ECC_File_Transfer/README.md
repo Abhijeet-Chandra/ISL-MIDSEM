@@ -13,7 +13,7 @@ Demonstrate hybrid file protection and timing concepts.
 ## Modified versions (additions)
 
 - `modifications/02_hybrid_file.py`
-- `modifications/hybrid_file.py`
+- `modifications/RSA_VS_ECC.py`
 
 ## Reusable blocks
 

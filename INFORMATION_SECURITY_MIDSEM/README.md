@@ -64,7 +64,7 @@ Python 3 is used because every implementation exercise in the manuals requests o
 - `LAB_5_HASHING/02_Socket_Hash_Integrity` - Socket hash integrity
 - `LAB_5_HASHING/03_Hash_Performance_Collisions` - MD5/SHA-1/SHA-256 experiment
 - `LAB_6_DIGITAL_SIGNATURE/01_RSA_Digital_Signature` - RSA digital signature
-- `LAB_6_DIGITAL_SIGNATURE/02_ElGamal_Signature` - ElGamal signature
+- `LAB_6_DIGITAL_SIGNATURE/02_ElGamal_Schnorr_Signature` - ElGamal signature
 - `LAB_6_DIGITAL_SIGNATURE/03_Schnorr_Signature` - Schnorr signature
 - `LAB_6_DIGITAL_SIGNATURE/04_Client_Server_Signature` - Client/server signatures
 - `LAB_6_DIGITAL_SIGNATURE/05_CIA_RSA_SHA_Signature` - CIA triad demonstration

@@ -1,11 +1,18 @@
-# MODIFICATION:
-# interactive and multiple inputs. This is a student-friendly addition derived from the official exercise; no source listing was supplied.
+def hash_function(text):
+    hash_value = 5381
+
+    for ch in text:
+        hash_value = hash_value * 33 + ord(ch)
+
+        # Mix the bits
+        hash_value = hash_value ^ (hash_value >> 16)
+
+        # Keep it within 32 bits
+        hash_value = hash_value & 0xFFFFFFFF
+
+    return hash_value
 
 
-def lab_hash(text):
- h=5381
- for ch in text:
-  h=((h*33)+ord(ch)) & 0xffffffff
-  h ^= (h >> 16)
- return h & 0xffffffff
-if __name__=='__main__': print(f'{lab_hash(input("Text: ")):08x}')
+text = input("Enter string: ")
+
+print("Hash value:", hash_function(text))

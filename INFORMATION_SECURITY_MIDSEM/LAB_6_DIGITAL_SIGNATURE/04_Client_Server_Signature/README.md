@@ -12,8 +12,8 @@ Send a signed message and verify it at a server.
 
 ## Modified versions (additions)
 
-- `modifications/02_signed_channel.py`
-- `modifications/signed_channel.py`
+- `modifications/client.py`
+- `modifications/server.py`
 
 ## Reusable blocks
 

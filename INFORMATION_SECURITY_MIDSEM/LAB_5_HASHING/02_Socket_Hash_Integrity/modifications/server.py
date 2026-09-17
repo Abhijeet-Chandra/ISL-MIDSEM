@@ -1,18 +1,42 @@
-# MODIFICATION:
-# normal and tampered mode. This is a student-friendly addition derived from the official exercise; no source listing was supplied.
+import socket
 
 
-import socket,hashlib
-HOST,PORT='127.0.0.1',5000
-def serve_once():
- with socket.socket() as s:
-  s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1); s.bind((HOST,PORT)); s.listen(1)
-  conn,_=s.accept()
-  with conn:
-   data=b''
-   while True:
-    part=conn.recv(4096)
-    if not part: break
-    data+=part
-   conn.sendall(hashlib.sha256(data).hexdigest().encode())
-if __name__=='__main__': serve_once()
+def hash_function(text):
+ hash_value = 5381
+
+ for ch in text:
+
+  hash_value = hash_value * 33 + ord(ch)
+
+  hash_value = hash_value ^ (hash_value >> 16)
+
+  hash_value = hash_value & 0xFFFFFFFF
+
+ return hash_value
+
+
+server = socket.socket()
+
+server.bind(("localhost", 5000))
+server.listen(1)
+
+print("Waiting for client...")
+
+con,addr = server.accept()
+
+
+print("Client connected")
+
+data = con.recv(1024).decode()
+
+print("Received: ", data)
+
+hash_value = hash_function(data)
+
+print("Hash: ", hash_value)
+
+con.send(str(hash_value).encode())
+
+con.close()
+
+server.close()
