@@ -1,3 +1,187 @@
+# INFORMATION SECURITY LAB – MID-TERM EXAMINATION
+#
+# Question:
+#
+# A hospital needs to securely transfer a confidential patient laboratory
+# report from the Laboratory Section to an authorized doctor through an
+# insecure network.
+#
+# Develop ONE integrated Python application named "SecureHealthTransfer"
+# that uses AES-128, RSA, ElGamal and hashing to provide confidentiality,
+# authentication and integrity protection.
+#
+# The solution must be implemented as one integrated application, not as
+# separate independent programs.
+#
+#
+# FIXED INPUT:
+#
+# Patient Report:
+#
+# PATIENT ID:1042; TEST:???; RESULT:13.5; STATUS:NORMAL
+#
+# Authorization Code: A2
+#
+# Key ID: EHR-AES-01
+#
+# Key Status: ACTIVE
+#
+#
+# HASHING ALGORITHM:
+#
+# Generate the hash only on the exact AES ciphertext.
+#
+# Initial hash value:
+#
+# h = 5381
+#
+# For each character of the ciphertext:
+#
+# h = (h * 33) + ord(ch)
+#
+# Apply bitwise operations to mix the bits and keep the hash value within
+# a 32-bit range.
+#
+# Display the final hash as exactly 8 uppercase hexadecimal digits.
+#
+#
+# REQUIRED INTEGRATED PROCESS:
+#
+# 1. Encrypt the exact Patient Report using AES-128 and the specified
+#    AES mode/padding.
+#
+# 2. Generate the RSA values n, phi(n), e and d using the given RSA
+#    parameters.
+#
+#    Use RSA to encrypt the AES key and recover it at the receiver.
+#
+# 3. Generate the ElGamal public key and private key.
+#
+#    Encrypt Authorization Code A2 using k = 53.
+#
+#    At the receiver, decrypt it and verify the recovered authorization
+#    code.
+#
+# 4. Generate the specified hash of the exact AES ciphertext.
+#
+# 5. Store the following in separate files:
+#
+#    - AES-encrypted patient report
+#    - RSA-encrypted AES key
+#    - ElGamal-encrypted authorization code
+#    - Sender hash
+#
+# 6. At the receiver, perform integrity verification FIRST.
+#
+#    Hash the received encrypted report and compare it with the sender's
+#    stored hash.
+#
+# 7. If the hashes match:
+#
+#    - Display "Integrity Verified"
+#    - Verify that Key ID EHR-AES-01 is ACTIVE
+#    - Use RSA to recover the AES key
+#    - Recover and verify the authorization code using ElGamal
+#    - Decrypt the patient report using AES
+#    - Display the decrypted patient report
+#
+# 8. After successful execution, modify exactly ONE character in the
+#    encrypted report file and run the receiver again using the stored
+#    sender hash.
+#
+# 9. When tampering is detected:
+#
+#    - Display that integrity verification failed
+#    - Detect/report data corruption or tampering
+#    - Stop the process
+#    - DO NOT perform decryption
+#
+#
+# EXPECTED PROCESS:
+#
+# Sender:
+#
+# Patient Report
+#       |
+#       v
+#    AES-128
+#       |
+#       v
+# AES Ciphertext
+#       |
+#       +------------------> Hash
+#       |                       |
+#       |                       v
+#       |                  Store Hash
+#       |
+#       +------------------> Store Ciphertext
+#
+#
+# AES Key
+#    |
+#    v
+#   RSA
+#    |
+#    v
+# RSA-Encrypted AES Key
+#
+#
+# Authorization Code A2
+#    |
+#    v
+#  ElGamal (k = 53)
+#    |
+#    v
+# Encrypted Authorization Code
+#
+#
+# Receiver:
+#
+# Received AES Ciphertext
+#         |
+#         v
+#    Calculate Hash
+#         |
+#         v
+# Compare with Sender Hash
+#         |
+#         +------ NO ------> Tampering Detected
+#         |                  STOP
+#         |                  NO DECRYPTION
+#         |
+#        YES
+#         |
+#         v
+# Integrity Verified
+#         |
+#         v
+# Verify Key ID EHR-AES-01 is ACTIVE
+#         |
+#         v
+# RSA Decrypt AES Key
+#         |
+#         v
+# ElGamal Decrypt Authorization Code
+#         |
+#         v
+# Verify Authorization Code = A2
+#         |
+#         v
+# AES Decrypt Patient Report
+#         |
+#         v
+# Display Original Patient Report
+#
+#
+# TAMPERING TEST:
+#
+# After the first successful receiver execution, modify exactly one
+# character of the AES ciphertext file.
+#
+# Run the receiver again.
+#
+# The receiver should calculate a different hash, detect tampering, and
+# stop before performing any decryption.
 import ast
 import random
 
